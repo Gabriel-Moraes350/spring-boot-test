@@ -1,4 +1,4 @@
-package com.moraes.agenda;
+package com.moraes.agenda.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

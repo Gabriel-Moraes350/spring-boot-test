@@ -12,6 +12,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Null;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -44,10 +45,8 @@ public class Contato implements Serializable {
     @Null
     private String photo;
 
-    @Temporal(TemporalType.DATE)
     @Column(name ="birth_date")
-    @JsonFormat(timezone = "America/Sao_Paulo", pattern = "yyyy/MM/dd", shape = JsonFormat.Shape.STRING)
-    private Date birthDate;
+    private LocalDate birthDate;
 
     @ElementCollection(fetch = FetchType.LAZY)
     @Cascade(org.hibernate.annotations.CascadeType.ALL)
