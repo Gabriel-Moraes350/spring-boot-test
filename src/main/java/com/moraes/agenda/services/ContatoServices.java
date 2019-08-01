@@ -40,6 +40,10 @@ public class ContatoServices {
         return pageItems;
     }
 
+    public List<Contato> lista(){
+        return contatoRep.findAll();
+    }
+
     public Contato update(Contato contato){
         log.info(contato.getEnderecos().toString());
         Contato contatoAtual = this.findById(contato.getId());

@@ -1,5 +1,6 @@
 package com.moraes.agenda.config.security;
 
+import com.moraes.agenda.exceptions.TokenInvalidException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -25,13 +26,15 @@ public class JwtAuthenticationFilter extends GenericFilterBean {
             throws IOException, ServletException {
         String token = service.resolveToken((HttpServletRequest) request);
         Authentication auth = null;
-        try{
-            if(token != null && service.validateToken(token)){
+        try {
+            if (token != null && service.validateToken(token)) {
                 auth = service.getAuthentication(token);
+                SecurityContextHolder.getContext().setAuthentication(auth);
+            } else {
+                throw new TokenInvalidException("Token Inválido");
             }
 
-            SecurityContextHolder.getContext().setAuthentication(auth);
-        }catch(Exception e){
+        } catch (Exception e) {
             SecurityContextHolder.clearContext();
         }
 

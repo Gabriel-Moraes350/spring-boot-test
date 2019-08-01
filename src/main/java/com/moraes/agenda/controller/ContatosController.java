@@ -3,6 +3,7 @@ package com.moraes.agenda.controller;
 import com.moraes.agenda.models.Contato;
 import com.moraes.agenda.services.ContatoServices;
 import com.moraes.agenda.utils.UploadUtils;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -19,18 +20,21 @@ import javax.annotation.security.RolesAllowed;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.List;
 
 @RestController
 @RequestMapping(value =  "/contatos")
+@Slf4j
 public class ContatosController {
 
     @Autowired
     private ContatoServices service;
 
     @PostMapping()
-    @Secured("ROLE_ADMIN")
+//    @Secured("ROLE_ADMIN")
     public ResponseEntity<Void> insert(@Valid @RequestBody Contato contato) throws URISyntaxException {
         contato = service.insert(contato);
+        log.info("Inserindo contato");
         UriComponents uriComponents = UriComponentsBuilder.fromUriString("/contatos/{id}").buildAndExpand(contato.getId());return ResponseEntity.created(new URI(uriComponents.toString())).build();
     }
 
@@ -46,6 +50,10 @@ public class ContatosController {
     public ResponseEntity<Contato> get(@Valid @PathVariable("id") Long id){
         Contato contato = service.findById(id);
         return ResponseEntity.ok(contato);
+    }
+    @GetMapping()
+    public ResponseEntity<List<Contato>> listSemPaginacao(){
+        return ResponseEntity.ok(service.lista());
     }
 
     @GetMapping("/list")
