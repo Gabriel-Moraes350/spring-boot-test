@@ -1,7 +1,7 @@
 package com.moraes.agenda.config.security;
 
 import com.moraes.agenda.exceptions.TokenInvalidException;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.GenericFilterBean;
@@ -13,6 +13,7 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
+@Slf4j
 public class JwtAuthenticationFilter extends GenericFilterBean {
 
     private TokenAuthenticationService service;
@@ -36,6 +37,7 @@ public class JwtAuthenticationFilter extends GenericFilterBean {
 
         } catch (Exception e) {
             SecurityContextHolder.clearContext();
+            e.printStackTrace();
         }
 
         filterChain.doFilter(request, response);

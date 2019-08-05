@@ -15,7 +15,7 @@ import java.util.List;
 
 @Component
 public class TokenAuthenticationService {
-    static final long EXPIRATION_TIME = 10000;
+    static final long EXPIRATION_TIME = 1000000;
     static final String SECRET = "MySecret";
     static final String TOKEN_PREFIX = "Bearer";
     static final String HEADER_STRING = "Authorization";
@@ -47,8 +47,8 @@ public class TokenAuthenticationService {
     }
 
     public String resolveToken(HttpServletRequest req) {
-        String bearerToken = req.getHeader("Authorization");
-        if (bearerToken != null && bearerToken.startsWith("Bearer ")) {
+        String bearerToken = req.getHeader(HEADER_STRING);
+        if (bearerToken != null && bearerToken.startsWith(TOKEN_PREFIX + " ")) {
             return bearerToken.substring(7);
         }
         return null;

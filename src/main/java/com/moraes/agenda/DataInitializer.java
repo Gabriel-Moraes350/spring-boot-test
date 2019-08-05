@@ -28,15 +28,15 @@ public class DataInitializer implements CommandLineRunner {
         //...
 
         this.users.save(User.builder()
-                .username("user")
-                .password(this.passwordEncoder.encode("password"))
+                .username("user@gmail.com")
+                .password(this.passwordEncoder.encode("user"))
                 .roles(Collections.singletonList("ROLE_USER"))
                 .build()
         );
 
         this.users.save(User.builder()
-                .username("admin")
-                .password(this.passwordEncoder.encode("password"))
+                .username("admin@gmail.com")
+                .password(this.passwordEncoder.encode("admin"))
                 .roles(Arrays.asList("ROLE_USER", "ROLE_ADMIN"))
                 .build()
         );

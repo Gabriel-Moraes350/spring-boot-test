@@ -31,7 +31,7 @@ public class ContatosController {
     private ContatoServices service;
 
     @PostMapping()
-//    @Secured("ROLE_ADMIN")
+    @Secured("ROLE_ADMIN")
     public ResponseEntity<Void> insert(@Valid @RequestBody Contato contato) throws URISyntaxException {
         contato = service.insert(contato);
         log.info("Inserindo contato");
