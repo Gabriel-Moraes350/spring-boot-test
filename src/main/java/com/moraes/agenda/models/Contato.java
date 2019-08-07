@@ -1,6 +1,7 @@
 package com.moraes.agenda.models;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -24,6 +25,7 @@ import java.util.List;
 @NotNull
 @Entity
 @EqualsAndHashCode(onlyExplicitlyIncluded =  true)
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Contato implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

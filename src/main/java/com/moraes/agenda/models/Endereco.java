@@ -1,6 +1,7 @@
 package com.moraes.agenda.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.moraes.agenda.enums.TipoEndereco;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -13,6 +14,7 @@ import java.io.Serializable;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Endereco implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -24,6 +26,8 @@ public class Endereco implements Serializable {
     private Contato contato;
 
     private String rua;
+
+    private String cep;
 
     @Enumerated(EnumType.STRING)
     private TipoEndereco tipoEndereco;
